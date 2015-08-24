@@ -1,0 +1,16 @@
+﻿  Table.cpp
+c:\users\kevin\dropbox\programming projects\c++\blackjack\blackjack\table.cpp(203): warning C4244: '=' : conversion from 'double' to 'unsigned int', possible loss of data
+  InputOutput.cpp
+c:\users\kevin\dropbox\programming projects\c++\blackjack\blackjack\inputoutput.cpp(490): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+  Generating Code...
+  Compiling...
+  Game.cpp
+  Generating Code...
+  Skipping... (no relevant changes detected)
+  MainMenu.cpp
+Table.obj : error LNK2001: unresolved external symbol __imp___CrtDbgReportW
+Banner.obj : error LNK2019: unresolved external symbol __imp___CrtDbgReportW referenced in function "public: char const & __thiscall std::_String_const_iterator<class std::_String_val<struct std::_Simple_types<char> > >::operator*(void)const " (??D?$_String_const_iterator@V?$_String_val@U?$_Simple_types@D@std@@@std@@@std@@QBEABDXZ)
+Game.obj : error LNK2001: unresolved external symbol __imp___CrtDbgReportW
+Deck.obj : error LNK2001: unresolved external symbol __imp___CrtDbgReportW
+InputOutput.obj : error LNK2001: unresolved external symbol __imp___CrtDbgReportW
+C:\Users\Kevin\Dropbox\Programming Projects\C++\Blackjack\Debug\Blackjack.exe : fatal error LNK1120: 1 unresolved externals

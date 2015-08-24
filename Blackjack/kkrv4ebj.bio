@@ -1,0 +1,29 @@
+#include "TextboxStream.h"
+
+TextboxStream::TextboxStream()
+{
+	for (size_t i = 0; i < STREAM_SIZE; i++)
+	{
+		stream[i] = "";
+	}
+}
+
+void TextboxStream::newEntry(string n)
+{
+	//Shift up everything one index. stream[3] is lost.
+	for (size_t i = STREAM_SIZE - 1; i >= 1; i--)
+	{
+		stream[i] = stream[i - 1];
+	}
+
+	stream[0] = n; //Add the new line.
+}
+
+void TextboxStream::printTextbox()
+{
+	for (int i = STREAM_SIZE - 1; i >= 0; i--)
+	{
+		cout << "     " << stream[i];
+		Sleep(1000);
+	}
+}

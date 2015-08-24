@@ -1,0 +1,296 @@
+#include "InputOutput.h"
+
+InputOutput::InputOutput()
+{
+	selectColor(15); //Default color for the game.
+}
+
+void InputOutput::printImmediateEvent(unsigned int Event)
+//1 = Player Blackjack, 2 = Player Bust, 3 = Player Blackjack, 4 = Dealer Bust
+//5 = Round Start, 
+{
+	if (Event == 1)
+	{
+		selectColor(10); cout << "!! BLACKJACK !!\n" << endl;
+	}
+	else if (Event == 2)
+	{
+		selectColor(12); cout << "!! BUST !!\n" << endl;
+	}
+	else if (Event == 3)
+	{
+		selectColor(12); cout << "!! DEALER BLACKJACK !!\n" << endl;
+	}
+	else if (Event == 4)
+	{
+		selectColor(10); cout << "!! DEALER BUST !!\n" << endl;
+	}
+	else if (Event == 5)
+	{
+		selectColor(13);
+		cout << "\n~~~~~~~~~~~~~~"; selectColor(15); cout << "The round has begun!";
+		selectColor(13); cout << "~~~~~~~~~~~~~~" << endl;
+		selectColor(15); cout << "The dealer will deal the cards out at this time." << endl;
+		selectColor(13); cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" << endl;
+	}
+	else if (Event == 6)
+	{
+		selectColor(13);
+		cout << "The dealer is dealt a card face down.\n" << endl;
+	}
+
+	Sleep(3000);
+	selectColor(15);
+}
+
+void InputOutput::printGameOutcome(unsigned int outcome, Table theTable)
+//1 = Player Win, 2 = Dealer Win, 3 = Push, 4 Win with a Blackjack on first two cards.
+{
+	if (outcome == 1 || outcome == 4)
+	{
+		selectColor(10); cout << "\nYOU have won the round!" << endl; selectColor(15);
+		cout << "You have earned "; selectColor(11); cout << "$" << theTable.getPlayersBet() << ".00";
+		selectColor(15); cout << "in winnings.\n" << endl;
+	}
+	else if (outcome == 2)
+	{
+		selectColor(12); cout << "\nThe dealer has won the round!" << endl; selectColor(15);
+		cout << "You have lost your bet of "; selectColor(12); cout << "$" << theTable.getPlayersBet() << ".00";
+		selectColor(15); cout << "\n" << endl;
+	}
+	else if (outcome == 3)
+	{
+		selectColor(14); cout << "\n!! PUSH !!" << endl; selectColor(15);
+		cout << "Your bet of $" << theTable.getPlayersBet() << ".00 has been returned.\n" << endl;
+	}
+
+	if (outcome == 4)
+	{
+		cout << "You have earned an extra "; selectColor(11); cout << '$' << setprecision(0) << fixed << (theTable.getPlayersBet() / 2);
+		selectColor(15); cout << " of your original bet for obtaining Blackjack on your first two cards!\n" << endl;
+	}
+}
+
+void InputOutput::printCardDealt(bool which, int howRecent, vector<Card>& pile) //True = Player, False = Dealer, howRecent = 0 would mean card just dealt
+{
+	if (which) //User
+	{
+		cout << "You are ";
+	}
+	else       //Dealer
+	{
+		cout << "The dealer is ";
+	}
+
+	cout << "dealt the " << pile[pile.size() - 1 - howRecent].getName() << " of " << pile[pile.size() - 1 - howRecent].getSuit() << '.' << endl;
+
+	Sleep(2000);
+}
+
+int InputOutput::grabUserInput(int parameter)
+//1 - 6 = $10 - $All-In Bets
+//1 = Space (Hit), 2 = S (Stand), 3 = D (Double Down), 4 = F (Forfeit), 5 = G (Split) 
+//Parameter: 1 (betting), 2 (First turn), 3 (any other turn)
+{
+	while (true) //Await a user's input
+	{
+		if (parameter == 1)//Betting phase
+		{
+			if (GetAsyncKeyState(0x31))
+			{
+				return 1; //User pressed 1 key
+			}
+			else if (GetAsyncKeyState(0x32))
+			{
+				return 2; //User pressed 2 key
+			}
+			else if (GetAsyncKeyState(0x33))
+			{
+				return 3; //User pressed 3 key
+			}
+			else if (GetAsyncKeyState(0x34))
+			{
+				return 4; //User pressed 4 key
+			}
+			else if (GetAsyncKeyState(0x35))
+			{
+				return 5; //User pressed 5 key
+			}
+			else if (GetAsyncKeyState(0x36))
+			{
+				return 6; //User pressed 6 key
+			}
+		}
+		else if (parameter > 1)
+		{
+			if (GetAsyncKeyState(VK_SPACE))
+			{
+				return 10; //User pressed spacebar key
+			}
+			else if (GetAsyncKeyState(0x53))
+			{
+				return 11; //User pressed S key
+			}
+			else if (GetAsyncKeyState(0x44))
+			{
+				return 12; //User pressed D key
+			}
+		}
+		else if (GetAsyncKeyState(0x46) && parameter == 2)
+		{
+			return 13; //User pressed F key
+		}
+
+		Sleep(10);
+	}
+}
+
+int InputOutput::grabUserBet(Table theTable)
+{
+	int userChoice;
+	int theBet = 0;
+
+	while (theBet == 0)
+	{
+		selectColor(11); cout << "\n                 ";
+		cout << "You currently have $" << theTable.getFunds() << ".00\n" << endl;
+		selectColor(15); cout << "                 Please place your bets now:" << endl;
+		cout << "1 ("; selectColor(10); cout << "$10"; selectColor(15); cout << ")   2 (";
+		selectColor(10); cout << "$25"; selectColor(15); cout << ")   3 ("; selectColor(14);
+		cout << "$50"; selectColor(15); cout << ")   4 ("; selectColor(14); cout << "$100";
+		selectColor(15); cout << ")   5 ("; selectColor(12); cout << "$500"; selectColor(15);
+		cout << ")   6 ("; selectColor(12); cout << "ALL-IN"; selectColor(15); cout << ")\n" << endl;
+
+		userChoice = grabUserInput(1);//Pass in 1 because we are only seeking 1-6 inputs.
+
+		if (userChoice < 7) //Check for valid input
+		{
+			int moneyAvailable = theTable.getFunds();
+
+			if (userChoice == 1)
+			{
+				theBet = 10;
+			}
+			else if (userChoice == 2 && moneyAvailable >= 25)
+			{
+				theBet = 25;
+			}
+			else if (userChoice == 3 && moneyAvailable >= 50)
+			{
+				theBet = 50;
+			}
+			else if (userChoice == 4 && moneyAvailable >= 100)
+			{
+				theBet = 100;
+			}
+			else if (userChoice == 5 && moneyAvailable >= 500)
+			{
+				theBet = 500;
+			}
+			else if (userChoice == 6)
+			{
+				theBet = moneyAvailable;
+			}
+			else
+			{
+				cout << "You do not have enough funds to make that bet!" << endl;
+				Sleep(1500);
+				system("cls"); //CLEAR CONSOLE
+			}
+		}
+	}
+
+	system("cls"); //CLEAR CONSOLE
+
+	return theBet;
+}
+
+int InputOutput::grabUserChoice(bool firstTurn)
+{
+	cout << "What would you like to do?" << endl;
+
+	return 1;
+}
+
+
+void InputOutput::selectColor(int color)
+//7: Dark White, 8: Dark Gray, 9: Dark Blue, 10: Neon Green, 11: Neon Teal, 12: Neon Red, 13: Neon Purple, 14: Neon Yellow, 15: Neon White
+{
+	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(hConsole, color);
+}
+
+void InputOutput::gameStartIntroduction()
+{
+	cout << "Welcome to Blackjack!\n\n" << endl;
+}
+
+void InputOutput::printHandAscii(bool which, bool dealerCardHidden, Table theTable) //True = Player, False = Dealer
+{
+	string n;                                        	//      __
+	vector<Card> hand;                                  //     |A |
+	//     |__|
+	if (which) //Depending on whose hand we want drawn.
+	{
+		hand = theTable.getPlayersCards();
+	}
+	else
+	{
+		hand = theTable.getDealersCards();
+	}
+
+	cout << "        ";
+	for (size_t i = 0; i < hand.size(); i++) //Top Layer
+	{
+		cout << " __ ";
+
+		if (i + 1 != hand.size()) //If we are not yet on the last card.
+		{
+			cout << ' '; //Add a space for the next card.
+		}
+	}
+	cout << endl;
+
+	if (which)
+	{
+		selectColor(10); cout << "PLAYER: "; selectColor(15);
+	}
+	else
+	{
+		selectColor(12); cout << "DEALER: "; selectColor(15);
+	}
+	for (size_t i = 0; i < hand.size(); i++) //Middle Layer
+	{
+		if (dealerCardHidden && i == hand.size() - 1)
+		{
+			n = ' '; //Card is hidden, print blank
+		}
+		else
+		{
+			n = hand[i].getName().substr(0, 1); //Get the first letter of the card we're drawing.
+		}
+
+		cout << "|" << n << " |";
+
+		if (i + 1 != hand.size()) //If we are not yet on the last card.
+		{
+			cout << ' '; //Add a space for the next card.
+		}
+	}
+	cout << endl;
+
+	cout << "        ";
+	for (size_t i = 0; i < hand.size(); i++) //Bottom Layer
+	{
+		cout << "|__|";
+
+		if (i + 1 != hand.size()) //If we are not yet on the last card.
+		{
+			cout << ' '; //Add a space for the next card.
+		}
+	}
+
+	cout << endl;
+}
+
+
