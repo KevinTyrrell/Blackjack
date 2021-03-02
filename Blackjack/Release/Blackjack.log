@@ -1,6 +1,0 @@
-﻿  Game.cpp
-  InputOutput.cpp
-InputOutput.cpp(497): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
-  Generating code
-  Finished generating code
-  Blackjack.vcxproj -> C:\Users\Kevin\Dropbox\Programming Projects\C++\Blackjack\Release\Blackjack.exe
