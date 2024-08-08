@@ -1,4 +1,4 @@
-//DEPENDENCIES
+	//DEPENDENCIES
 #include "include/Banner.h"
 #include "include/Deck.h"
 #include "include/InputOutput.h"
@@ -191,7 +191,7 @@ void checkForEvent(bool which)
 			consoleWindow.printUserInterface(textbox, theTable, theBanner, dealerCardIsHidden);
 		}
 												//If the dealer is at or above 17, not including a soft 17.
-		else if (theTable.getPlayersScore(false) >= 17 && theTable.hasSoft17(theTable.getDealersCards()) == false)
+		else if (theTable.getPlayersScore(false) >= 17 || theTable.hasSoft17(theTable.getDealersCards()) == false)
 		{
 			roundIsOver = true;
 		}
