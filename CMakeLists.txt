@@ -3,6 +3,7 @@ project(Blackjack)
 
 set(CMAKE_CXX_STANDARD 14)
 
+add_link_options(-static -static-libgcc -static-libstdc++)
 include_directories(src/include)
 
 add_executable(Blackjack

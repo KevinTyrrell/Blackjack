@@ -1,19 +1,20 @@
 
-<br />
-<p align="center">
-  <h3 align="center">Blackjack (C++)</h3>
 
-  <p align="center">
-    (2015) Console-based Blackjack game written in C++ for Windows.
-    <br />
-	<br />
-	<img src="https://raw.githubusercontent.com/KevinTyrrell/Blackjack/master/res/images/demo.gif", alt="Blackjack Demo GIF">
-	<br />
-	<br />
-	<a href="https://github.com/KevinTyrrell/Blackjack/releases">Releases (Windows)</a>
-	<br />
-  </p>
-</p>
+<br />  
+<p align="center">  
+  <h3 align="center">Blackjack (C++)</h3>  
+
+  <p align="center">  
+    (2015) Console-based Blackjack game written in C++ for Windows.  
+    <br />  
+    <br />  
+    <img src="https://raw.githubusercontent.com/KevinTyrrell/Blackjack/master/res/images/demo.gif", alt="Blackjack Demo GIF">  
+    <br />  
+    <br />  
+    <a href="https://github.com/KevinTyrrell/Blackjack/releases">Releases (Windows)</a>  
+    <br />  
+  </p>  
+</p>  
 
 ## About The Project
 
@@ -26,7 +27,13 @@ Features:
 * Scrollable rulebook (use arrow keys to traverse)
 * Splitting hands (one split per round)
 
-<!-- CONTACT -->
+## Download & Installation (Windows)
+* Download `Blackjack.zip` from the [[Lastest Release]](https://github.com/KevinTyrrell/Blackjack/releases/latest).
+* Unzip `Blackjack.zip`, usually into its own directory.
+* Run `Blackjack.bat`, ensuring `Blackjack.exe` is in the same directory.
+    * Alternatively, from a Bash terminal, run `Blackjack.sh`, ensuring `Blackjack.exe` is in the same directory.
+
+<!-- CONTACT -->  
 ## Contact
 
 Kevin Tyrrell - KevinTearUl@gmail.com
