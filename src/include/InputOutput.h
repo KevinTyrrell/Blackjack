@@ -57,7 +57,7 @@ private:
 	void printDiamondsSymbol(string spaces);
 	void printSpadesSymbol(string spaces);
 	void printHeartsSymbol(string spaces);
-	unsigned int textSpeed = 2700;											//Time in miliseconds.
+	unsigned int textSpeed = 1500;											//Time in miliseconds.
 };
 
 #endif //__INPUTOUTPUT_H_

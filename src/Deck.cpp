@@ -44,7 +44,7 @@ void Deck::initializeDeck() //Add all cards into the deck. Needs shuffling of co
 
 			for (int z = 2; z <= 10; z++) //No such thing as a 1. Start at 2.
 			{
-				string converted = static_cast<ostringstream*>(&(ostringstream() << z))->str(); //Make int Z into String Z
+				string converted = to_string(z); //Make int Z into String Z
 				deck.push_back(Card(converted, s, z));
 			}
 

@@ -32,7 +32,7 @@ class Deck
 {
 public:
 	Deck();												//Default constructor.
-	vector<Card>& Deck::getDeck();						//Return the deck.
+	vector<Card>& getDeck();						//Return the deck.
 	void cardsBackIntoDeck(vector<Card>& discardPile);	//Puts cards from all piles back into the deck.
 	void deal(vector<Card>& pile);						//Deals a card from the deck to a given player.
 	void initializeDeck();								//Initializes shoe with Playing Cards.

@@ -190,8 +190,8 @@ void checkForEvent(bool which)
 			textbox.newEntry(consoleWindow.getImmediateEvent(3, theTable, firstTurn));
 			consoleWindow.printUserInterface(textbox, theTable, theBanner, dealerCardIsHidden);
 		}
-												//If the dealer is at or above 17, not including a soft 17.
-		else if (theTable.getPlayersScore(false) >= 17 || theTable.hasSoft17(theTable.getDealersCards()) == false)
+												//If the dealer is at or above 17.
+		else if (theTable.getPlayersScore(false) >= 17)
 		{
 			roundIsOver = true;
 		}
